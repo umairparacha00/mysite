@@ -1,0 +1,33 @@
+created:
+    - database/migrations/2020_08_28_145438_create_users_table.php
+    - database/migrations/2020_08_28_145439_create_sponsors_table.php
+    - database/migrations/2020_08_28_145440_create_balances_table.php
+    - database/migrations/2020_08_28_145441_create_transactions_table.php
+    - database/migrations/2020_08_28_145442_create_ad_powers_table.php
+    - database/migrations/2020_08_28_145443_create_pins_table.php
+    - database/migrations/2020_08_28_145444_create_memberships_table.php
+    - app/User.php
+    - app/Sponsor.php
+    - app/Balance.php
+    - app/Transaction.php
+    - app/Ad_power.php
+    - app/Pin.php
+    - app/Membership.php
+    - database/factories/UserFactory.php
+    - database/factories/SponsorFactory.php
+    - database/factories/BalanceFactory.php
+    - database/factories/TransactionFactory.php
+    - database/factories/AdPowerFactory.php
+    - database/factories/PinFactory.php
+    - database/factories/MembershipFactory.php
+models:
+    User: { account_id: 'id unique', username: string, full_name: string, email: 'string unique', email_verified_at: 'timestamp nullable', last_activity: 'timestamp nullable', status: 'boolean default:false', password: string, cnic: 'string unique nullable', date_of_birth: 'date nullable', phone: 'string nullable', gender: 'string nullable', address: 'string nullable', city: 'string nullable', state: 'string nullable', country: 'string nullable', profile_pic: 'string nullable', cnic_pic: 'string nullable', bank_pic: 'string nullable', cnic_file_status: 'string nullable', bank_file_status: 'string nullable' }
+    Sponsor: { user_account_id: 'foreignId:user:account_id', sponsor_id: 'foreignId:user:account_id' }
+    Balance: { user_account_id: 'id:user', main_balance: 'integer default:0', group_balance: 'integer default:0', mall_balance: 'integer default:0', ad_power_balance: 'integer default:0' }
+    Transactions: { user_account_id: id, balance_type: string, credit_debit: string, amount: integer, old_balance: integer, new_balance: integer, transactions_details: longtext }
+    Ad_powers: { user_account_id: id, name: string, expires_at: timestamp, amount: integer }
+    Pins: { user_account_id: id, amount: integer }
+    Transaction: { user_account_id: id, balance_type: string, credit_debit: string, amount: integer, old_balance: integer, new_balance: integer, transactions_details: longtext }
+    Ad_power: { user_account_id: id, name: string, expires_at: timestamp, amount: integer }
+    Pin: { user_account_id: id, amount: integer, acutal_pin: string }
+    Membership: { user_account_id: id, name: string }

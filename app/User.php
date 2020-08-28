@@ -2,30 +2,46 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'account_id',
+        'username',
+        'full_name',
+        'email',
+        'email_verified_at',
+        'last_activity',
+        'status',
+        'password',
+        'cnic',
+        'date_of_birth',
+        'phone',
+        'gender',
+        'address',
+        'city',
+        'state',
+        'country',
+        'profile_pic',
+        'cnic_pic',
+        'bank_pic',
+        'cnic_file_status',
+        'bank_file_status',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -34,6 +50,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'id' => 'integer',
+        'account_id' => 'integer',
+        'status' => 'boolean',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'email_verified_at',
+        'last_activity',
+    ];
+
+
+    public function account()
+    {
+        return $this->belongsTo(\App\Account::class);
+    }
 }

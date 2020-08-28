@@ -4,25 +4,29 @@
 
 use App\User;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'account_id' => factory(\App\Account::class),
+        'username' => $faker->userName,
+        'full_name' => $faker->word,
+        'email' => $faker->safeEmail,
+        'email_verified_at' => $faker->dateTime(),
+        'last_activity' => $faker->dateTime(),
+        'status' => $faker->boolean,
+        'password' => $faker->password,
+        'cnic' => $faker->word,
+        'date_of_birth' => $faker->date(),
+        'phone' => $faker->phoneNumber,
+        'gender' => $faker->word,
+        'address' => $faker->word,
+        'city' => $faker->city,
+        'state' => $faker->word,
+        'country' => $faker->country,
+        'profile_pic' => $faker->word,
+        'cnic_pic' => $faker->word,
+        'bank_pic' => $faker->word,
+        'cnic_file_status' => $faker->word,
+        'bank_file_status' => $faker->word,
     ];
 });
